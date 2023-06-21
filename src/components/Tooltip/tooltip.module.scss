@@ -1,0 +1,99 @@
+@use "../../styles/index.scss" as *;
+
+$tooltip-arrow-size: 17px;
+
+.tooltipWrapper {
+  position: relative;
+  z-index: 100;
+}
+
+/* Absolute positioning */
+.tooltip {
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.2));
+  width: 315px;
+  font-family: $font-Arial;
+  z-index: 100;
+}
+
+/* CSS border triangles */
+.tooltip::before {
+  content: " ";
+  left: 50%;
+  border: solid transparent;
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-width: $tooltip-arrow-size;
+  margin-left: calc($tooltip-arrow-size * -1);
+}
+
+/* Absolute positioning */
+.top {
+  //   top: -114px;
+  top: calc((var(--element-height) + 20px + $tooltip-arrow-size) * -1);
+}
+/* CSS border triangles */
+.top::before {
+  top: 100%;
+  border-top-color: $color-light-gray;
+}
+
+/* Absolute positioning */
+.right {
+  //   left: calc(100% + var(--tooltip-margin));
+  left: calc(100% + 20px + $tooltip-arrow-size);
+  top: 50%;
+  transform: translateX(0) translateY(-50%);
+}
+/* CSS border triangles */
+.right::before {
+  left: calc($tooltip-arrow-size * -1);
+  top: 50%;
+  transform: translateX(0) translateY(-50%);
+  border-right-color: $color-light-gray;
+}
+
+/* Absolute positioning */
+.bottom {
+  bottom: calc((var(--element-height) + 20px + $tooltip-arrow-size) * -1);
+}
+/* CSS border triangles */
+.bottom::before {
+  bottom: 100%;
+  border-bottom-color: $color-light-gray;
+}
+
+/* Absolute positioning */
+.tooltip.left {
+  left: auto;
+  right: calc(100% + 20px + $tooltip-arrow-size);
+  top: 50%;
+  transform: translateX(0) translateY(-50%);
+}
+/* CSS border triangles */
+.tooltip.left::before {
+  left: auto;
+  right: calc($tooltip-arrow-size * -2);
+  top: 50%;
+  transform: translateX(0) translateY(-50%);
+  border-left-color: $color-light-gray;
+}
+.tooltipOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+
+  padding: 15px 0;
+
+  background: $color-black-03;
+  z-index: 10;
+}
