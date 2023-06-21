@@ -1,0 +1,39 @@
+@use "../../styles/index.scss" as *;
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 30px;
+  font-family: $font-Arial;
+  color: $color-black;
+}
+.pageImage {
+  max-width: 876px;
+  margin-bottom: 100px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+.pageInfo {
+  text-align: center;
+  h1 {
+    font-weight: $fw-bold;
+    font-size: 50px;
+    line-height: 75px;
+    margin-bottom: 25px;
+  }
+  p {
+    font-weight: $fw-regular;
+    font-size: 25px;
+    line-height: 38px;
+  }
+}
+.buttonContainer {
+  margin-top: 75px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
