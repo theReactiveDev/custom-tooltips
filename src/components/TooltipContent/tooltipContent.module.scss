@@ -1,0 +1,51 @@
+@use "../../styles/index.scss" as *;
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  border-radius: 5px;
+  color: $color-black;
+  background: $color-light-gray;
+  font-family: $font-Arial;
+  font-weight: $fw-bold;
+  font-size: 14px;
+  line-height: 21px;
+}
+.cross {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.content {
+  max-width: 250px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h1 {
+    font-size: 18px;
+    line-height: 27px;
+  }
+  p {
+    font-weight: $fw-regular;
+  }
+}
+.step {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    border-bottom: 0.8px solid $color-black;
+    cursor: pointer;
+  }
+
+  span {
+    font-weight: $fw-regular;
+    color: #989898;
+  }
+}
