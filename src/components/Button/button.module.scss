@@ -1,0 +1,25 @@
+@use "../../styles/index.scss" as *;
+
+.btn {
+  width: 300px;
+
+  padding: 15px 30px;
+  background-color: $color-light-gray;
+  color: $color-black;
+  font-family: $font-Arial;
+  font-weight: $fw-bold;
+  font-size: 16px;
+  line-height: 24px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.5s;
+  //   &:hover {
+  //     background-color: $color-space-blue;
+  //   }
+}
+.dark {
+  background-color: $color-grafit;
+  color: $color-white;
+}
