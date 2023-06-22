@@ -16,6 +16,7 @@ interface TooltipProps {
   onClose: () => void;
   onNextStep: () => void;
   className?: string;
+  targetSelector: string;
 }
 
 const Tooltip: FC<TooltipProps> = ({
@@ -27,11 +28,14 @@ const Tooltip: FC<TooltipProps> = ({
   currentStep,
   onNextStep,
   onClose,
+  targetSelector,
 }) => {
   const TooltipRef = useRef<HTMLDivElement>(null);
+  const target = document.querySelector(targetSelector);
 
-  useEffect(() => {
+  const handleResize = () => {
     if (TooltipRef.current) {
+      console.log("размеры поменялись");
       const RectSize = TooltipRef.current.getBoundingClientRect();
       TooltipRef.current.style.setProperty(
         "--element-height",
@@ -41,8 +45,38 @@ const Tooltip: FC<TooltipProps> = ({
         "--element-width",
         RectSize.width + "px"
       );
+      TooltipRef.current.style.zIndex = "100";
     }
-  }, [TooltipRef]);
+  };
+  useEffect(() => {
+    let TooltipObserver = new ResizeObserver(handleResize);
+    if (TooltipRef.current) {
+      TooltipObserver.observe(TooltipRef.current);
+
+      return () => {
+        TooltipObserver.disconnect();
+      };
+    }
+  }, [show]);
+
+  useEffect(() => {
+    console.log(show, currentStep, targetSelector);
+    if (show && currentStep === content.id) {
+      if (TooltipRef.current) {
+        TooltipRef.current.style.zIndex = "100";
+      }
+      if (target) {
+        target.setAttribute("style", " position: relative; z-index: 100");
+      }
+    } else {
+      if (TooltipRef.current) {
+        TooltipRef.current.style.zIndex = "unset";
+      }
+      if (target) {
+        target.setAttribute("style", " position: static; z-index: unset");
+      }
+    }
+  }, [show, currentStep]);
 
   return (
     <div className={s.tooltipWrapper}>

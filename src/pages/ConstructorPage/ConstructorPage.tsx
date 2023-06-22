@@ -1,36 +1,39 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import Button from "../../components/Button/Button";
 import Tooltip from "../../components/Tooltip/Tooltip";
 
-import { TooltipsMock } from "../../shared/mocks/tooltipsMock";
+import { TooltipContext } from "../../context/tooltip-context";
+
+import ConstructorImage from "../../assets/images/constructorImage.png";
 
 import s from "./constructorPage.module.scss";
-import { TooltipContext } from "../../context/tooltip-context";
-// import ConstructorImage from "/constructorImage.png";
+
 const ConstructorPage = () => {
-  //   const [currentStep, setCurrentStep] = useState(1);
-  //   const [showTooltips, setShowTooltips] = useState(
-  //     !localStorage.getItem("onboard")
-  //   );
   console.log(localStorage.removeItem("onboard"));
 
-  const { currentStep, setCurrentStep, showTooltips, setShowTooltips } =
-    useContext(TooltipContext);
+  const {
+    currentStep,
+    setCurrentStep,
+    showTooltips,
+    setShowTooltips,
+    tooltipData,
+  } = useContext(TooltipContext);
+  console.log(useContext(TooltipContext));
 
   const onOnboardComplete = () => {
     localStorage.setItem("onboard", "complete");
   };
 
   const handleNextStep = () => {
-    if (currentStep === TooltipsMock.length) {
+    if (currentStep === tooltipData.length) {
       setShowTooltips(false);
       onOnboardComplete();
     } else {
-      //   setCurrentStep((prev) => prev + 1);
       setCurrentStep(currentStep + 1);
     }
   };
+
   const handleClose = () => {
     setShowTooltips(false);
     onOnboardComplete();
@@ -39,7 +42,12 @@ const ConstructorPage = () => {
   return (
     <div className={s.pageWrapper}>
       <div className={s.pageImage}>
-        <img src="/constructorImage.png" alt="Constructor Image" />
+        <img
+          src={ConstructorImage}
+          alt="Constructor Image"
+          height={275}
+          width={876}
+        />
       </div>
       <div className={s.pageInfo}>
         <h1>Добро пожаловать в конструктор!</h1>
@@ -48,23 +56,29 @@ const ConstructorPage = () => {
       <div className={s.buttonContainer}>
         <Tooltip
           position="top"
-          content={TooltipsMock[0]}
+          content={tooltipData[0]}
           currentStep={currentStep}
           show={showTooltips}
           onNextStep={handleNextStep}
           onClose={handleClose}
+          targetSelector=".configBtn"
         >
-          <Button title="Изменить конфигурацию" />
+          <Button title="Изменить конфигурацию" className="configBtn" />
         </Tooltip>
         <Tooltip
           position="right"
-          content={TooltipsMock[1]}
+          content={tooltipData[1]}
           currentStep={currentStep}
           show={showTooltips}
           onNextStep={handleNextStep}
           onClose={handleClose}
+          targetSelector=".buyBtn"
         >
-          <Button title="Изменить конфигурацию" variant="dark" />
+          <Button
+            title="Купить любой диван"
+            variant="dark"
+            className="buyBtn"
+          />
         </Tooltip>
       </div>
     </div>

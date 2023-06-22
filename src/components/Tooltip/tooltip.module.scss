@@ -4,7 +4,6 @@ $tooltip-arrow-size: 17px;
 
 .tooltipWrapper {
   position: relative;
-  z-index: 100;
 }
 
 /* Absolute positioning */
@@ -16,7 +15,6 @@ $tooltip-arrow-size: 17px;
   filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.2));
   width: 315px;
   font-family: $font-Arial;
-  z-index: 100;
 }
 
 /* CSS border triangles */
