@@ -1,38 +1,37 @@
-import { FC, ReactNode, useEffect, useRef } from "react";
+import { FC, ReactNode, useContext, useEffect, useRef } from "react";
 import cn from "classnames";
 
 import { TooltipContent } from "../../components";
 
-import { Tooltip as TooltipType } from "../../shared/types";
+import { TooltipContext } from "../../context";
 
 import s from "./tooltip.module.scss";
 
 interface TooltipProps {
-  content: TooltipType;
   children: ReactNode;
   position: "right" | "top" | "left" | "bottom";
-  currentStep: number;
-  totalSteps: number;
-  show: boolean;
-  onClose: () => void;
-  onNextStep: () => void;
+  step: number;
   className?: string;
-  targetSelector: string;
 }
 
 export const Tooltip: FC<TooltipProps> = ({
   position,
-  show,
-  content,
+  step,
   children,
   className,
-  currentStep,
-  totalSteps,
-  onNextStep,
-  onClose,
-  targetSelector,
 }) => {
   const TooltipRef = useRef<HTMLDivElement>(null);
+  const ChildrenRef = useRef<HTMLDivElement>(null);
+
+  const {
+    currentStep,
+    setCurrentStep,
+    showTooltips,
+    setShowTooltips,
+    tooltipData,
+  } = useContext(TooltipContext);
+
+  const content = step < tooltipData.length ? tooltipData[step] : null;
 
   const handleResize = () => {
     if (TooltipRef.current) {
@@ -57,12 +56,12 @@ export const Tooltip: FC<TooltipProps> = ({
         TooltipObserver.disconnect();
       };
     }
-  }, [show]);
+  }, [showTooltips]);
 
   useEffect(() => {
-    const target = document.querySelector(targetSelector);
+    const target = ChildrenRef.current;
 
-    if (show && currentStep === content.id) {
+    if (isTooltipShow()) {
       if (TooltipRef.current) {
         TooltipRef.current.style.zIndex = "100";
       }
@@ -77,22 +76,44 @@ export const Tooltip: FC<TooltipProps> = ({
         target.setAttribute("style", " position: static; z-index: unset");
       }
     }
-  }, [show, currentStep]);
+  }, [showTooltips, currentStep]);
+
+  const isTooltipShow = () => {
+    return content && currentStep === content.id && showTooltips;
+  };
+
+  const onOnboardComplete = () => {
+    localStorage.setItem("onboard", "complete");
+  };
+
+  const onNextStep = () => {
+    if (currentStep === tooltipData.length) {
+      setShowTooltips(false);
+      onOnboardComplete();
+    } else {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const onClose = () => {
+    setShowTooltips(false);
+    onOnboardComplete();
+  };
 
   return (
     <div className={s.tooltipWrapper}>
-      {children}
-      {currentStep === content.id && show && (
+      <div ref={ChildrenRef}>{children}</div>
+      {isTooltipShow() && (
         <div>
           <div
             className={cn(s.tooltip, s[position], className)}
             ref={TooltipRef}
           >
             <TooltipContent
-              content={content}
+              content={content!}
               onNextStep={onNextStep}
               onClose={onClose}
-              totalSteps={totalSteps}
+              totalSteps={tooltipData.length}
             />
           </div>
           <div className={s.tooltipOverlay}></div>
