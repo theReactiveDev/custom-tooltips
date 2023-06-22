@@ -6,7 +6,7 @@ import { TooltipContextProvider } from "./context/tooltip-context";
 function App() {
   return (
     <div className="App">
-      <TooltipContextProvider>
+      <TooltipContextProvider settings={{ delay: 5 }}>
         <ConstructorPage />
       </TooltipContextProvider>
     </div>

@@ -13,7 +13,7 @@ const ConstructorPage = () => {
   //   const [showTooltips, setShowTooltips] = useState(
   //     !localStorage.getItem("onboard")
   //   );
-  //   console.log(localStorage.removeItem("onboard"));
+  console.log(localStorage.removeItem("onboard"));
 
   const { currentStep, setCurrentStep, showTooltips, setShowTooltips } =
     useContext(TooltipContext);
