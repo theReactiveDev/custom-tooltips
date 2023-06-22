@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import Button from "../../components/Button/Button";
 import Tooltip from "../../components/Tooltip/Tooltip";
@@ -6,13 +6,18 @@ import Tooltip from "../../components/Tooltip/Tooltip";
 import { TooltipsMock } from "../../shared/mocks/tooltipsMock";
 
 import s from "./constructorPage.module.scss";
+import { TooltipContext } from "../../context/tooltip-context";
 // import ConstructorImage from "/constructorImage.png";
 const ConstructorPage = () => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [showTooltips, setShowTooltips] = useState(
-    !localStorage.getItem("onboard")
-  );
-  console.log(localStorage.removeItem("onboard"));
+  //   const [currentStep, setCurrentStep] = useState(1);
+  //   const [showTooltips, setShowTooltips] = useState(
+  //     !localStorage.getItem("onboard")
+  //   );
+  //   console.log(localStorage.removeItem("onboard"));
+
+  const { currentStep, setCurrentStep, showTooltips, setShowTooltips } =
+    useContext(TooltipContext);
+
   const onOnboardComplete = () => {
     localStorage.setItem("onboard", "complete");
   };
@@ -22,7 +27,8 @@ const ConstructorPage = () => {
       setShowTooltips(false);
       onOnboardComplete();
     } else {
-      setCurrentStep((prev) => prev + 1);
+      //   setCurrentStep((prev) => prev + 1);
+      setCurrentStep(currentStep + 1);
     }
   };
   const handleClose = () => {
