@@ -6,25 +6,25 @@ import { Tooltip } from "../../shared/types/tooltip";
 
 interface TooltipContentProps {
   content: Tooltip;
+  onNextStep: () => void;
+  onClose: () => void;
 }
 
-const TooltipContent: FC<TooltipContentProps> = ({ content }) => {
+const TooltipContent: FC<TooltipContentProps> = ({
+  content,
+  onNextStep,
+  onClose,
+}) => {
   return (
     <div className={s.container}>
-      <CloseIcon className={s.cross} />
+      <CloseIcon className={s.cross} onClick={onClose} />
       <div className={s.content}>
         <h1>{content.title}</h1>
         <p>{content.description}</p>
       </div>
 
       <div className={s.step}>
-        <a
-          onClick={() => {
-            console.log("Что то делаю");
-          }}
-        >
-          {content.button}
-        </a>
+        <a onClick={onNextStep}>{content.button}</a>
         <span>{content.id} / 4</span>
       </div>
     </div>

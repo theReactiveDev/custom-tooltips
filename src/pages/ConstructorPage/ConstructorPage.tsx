@@ -8,8 +8,28 @@ import { TooltipsMock } from "../../shared/mocks/tooltipsMock";
 import s from "./constructorPage.module.scss";
 // import ConstructorImage from "/constructorImage.png";
 const ConstructorPage = () => {
-  const [currentTooltip, setCurrentTooltip] = useState(0);
-  const [showTooltip, setShowTooltip] = useState(true);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [showTooltips, setShowTooltips] = useState(
+    !localStorage.getItem("onboard")
+  );
+  console.log(localStorage.removeItem("onboard"));
+  const onOnboardComplete = () => {
+    localStorage.setItem("onboard", "complete");
+  };
+
+  const handleNextStep = () => {
+    if (currentStep === TooltipsMock.length) {
+      setShowTooltips(false);
+      onOnboardComplete();
+    } else {
+      setCurrentStep((prev) => prev + 1);
+    }
+  };
+  const handleClose = () => {
+    setShowTooltips(false);
+    onOnboardComplete();
+  };
+
   return (
     <div className={s.pageWrapper}>
       <div className={s.pageImage}>
@@ -20,10 +40,24 @@ const ConstructorPage = () => {
         <p>Выберите действие для продолжения</p>
       </div>
       <div className={s.buttonContainer}>
-        <Tooltip position="top" content={TooltipsMock[0]}>
+        <Tooltip
+          position="top"
+          content={TooltipsMock[0]}
+          currentStep={currentStep}
+          show={showTooltips}
+          onNextStep={handleNextStep}
+          onClose={handleClose}
+        >
           <Button title="Изменить конфигурацию" />
         </Tooltip>
-        <Tooltip position="right" content={TooltipsMock[1]}>
+        <Tooltip
+          position="right"
+          content={TooltipsMock[1]}
+          currentStep={currentStep}
+          show={showTooltips}
+          onNextStep={handleNextStep}
+          onClose={handleClose}
+        >
           <Button title="Изменить конфигурацию" variant="dark" />
         </Tooltip>
       </div>

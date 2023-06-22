@@ -1,24 +1,33 @@
-import { FC, ReactNode, useEffect, useRef, useState } from "react";
+import { FC, ReactNode, useEffect, useRef } from "react";
 import cn from "classnames";
 
-import s from "./tooltip.module.scss";
-import { Tooltip as TooltipType } from "../../shared/types/tooltip";
 import TooltipContent from "../TooltipContent/TooltipContent";
 
+import { Tooltip as TooltipType } from "../../shared/types/tooltip";
+
+import s from "./tooltip.module.scss";
+
 interface TooltipProps {
-  position: "right" | "top" | "left" | "bottom";
   content: TooltipType;
   children: ReactNode;
+  position: "right" | "top" | "left" | "bottom";
+  currentStep: number;
+  show: boolean;
+  onClose: () => void;
+  onNextStep: () => void;
   className?: string;
 }
 
 const Tooltip: FC<TooltipProps> = ({
   position,
+  show,
   content,
   children,
   className,
+  currentStep,
+  onNextStep,
+  onClose,
 }) => {
-  const [isActive, setIsActive] = useState<Boolean>(true);
   const TooltipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,27 +41,28 @@ const Tooltip: FC<TooltipProps> = ({
         "--element-width",
         RectSize.width + "px"
       );
-      //   console.log(height, "height");
     }
   }, [TooltipRef]);
 
   return (
     <div className={s.tooltipWrapper}>
       {children}
-      {isActive && (
+      {currentStep === content.id && show && (
         <div>
           <div
             className={cn(s.tooltip, s[position], className)}
             ref={TooltipRef}
           >
-            <TooltipContent content={content} />
+            <TooltipContent
+              content={content}
+              onNextStep={onNextStep}
+              onClose={onClose}
+            />
           </div>
           <div className={s.tooltipOverlay}></div>
         </div>
       )}
     </div>
-    //
-    // </div>
   );
 };
 
