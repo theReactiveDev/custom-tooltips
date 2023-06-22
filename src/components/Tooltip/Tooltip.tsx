@@ -3,7 +3,7 @@ import cn from "classnames";
 
 import { TooltipContent } from "../../components";
 
-import { Tooltip as TooltipType } from "../../shared/types/tooltip";
+import { Tooltip as TooltipType } from "../../shared/types";
 
 import s from "./tooltip.module.scss";
 

@@ -1,8 +1,10 @@
 import { FC } from "react";
 
-import s from "./tooltipContent.module.scss";
+import { Tooltip } from "../../shared/types";
+
 import { CloseIcon } from "../../assets/icons/CloseIcon";
-import { Tooltip } from "../../shared/types/tooltip";
+
+import s from "./tooltipContent.module.scss";
 
 interface TooltipContentProps {
   content: Tooltip;

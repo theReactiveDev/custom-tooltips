@@ -1,6 +1,6 @@
-import ConstructorPage from "./pages/ConstructorPage/ConstructorPage";
-import { TooltipContextProvider } from "./context/tooltip-context";
-import { TooltipsMock } from "./shared/mocks/tooltipsMock";
+import { ConstructorPage } from "./pages";
+import { TooltipContextProvider } from "./context";
+import { TooltipsMock } from "./shared/mocks";
 
 import "./App.scss";
 

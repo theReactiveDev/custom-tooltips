@@ -1,6 +1,5 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { Settings } from "../shared/types/settings";
-import { Tooltip } from "../shared/types/tooltip";
+import { Settings, Tooltip } from "../shared/types";
 
 interface ITooltipContext {
   currentStep: number;

@@ -2,13 +2,13 @@ import { useContext } from "react";
 
 import { Button, Tooltip } from "../../components";
 
-import { TooltipContext } from "../../context/tooltip-context";
+import { TooltipContext } from "../../context";
 
 import ConstructorImage from "../../assets/images/constructorImage.png";
 
 import s from "./constructorPage.module.scss";
 
-const ConstructorPage = () => {
+export const ConstructorPage = () => {
   //   console.log(localStorage.removeItem("onboard"));
 
   const {
@@ -84,5 +84,3 @@ const ConstructorPage = () => {
     </div>
   );
 };
-
-export default ConstructorPage;

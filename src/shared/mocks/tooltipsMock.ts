@@ -1,4 +1,4 @@
-import { Tooltip } from "../types/tooltip";
+import { Tooltip } from "../types";
 
 export const TooltipsMock: Tooltip[] = [
   {

@@ -6,7 +6,6 @@ $tooltip-arrow-size: 17px;
   position: relative;
 }
 
-/* Absolute positioning */
 .tooltip {
   position: absolute;
   border-radius: 4px;
@@ -17,7 +16,6 @@ $tooltip-arrow-size: 17px;
   font-family: $font-Arial;
 }
 
-/* CSS border triangles */
 .tooltip::before {
   content: " ";
   left: 50%;
@@ -30,25 +28,21 @@ $tooltip-arrow-size: 17px;
   margin-left: calc($tooltip-arrow-size * -1);
 }
 
-/* Absolute positioning */
 .top {
-  //   top: -114px;
   top: calc((var(--element-height) + 20px + $tooltip-arrow-size) * -1);
 }
-/* CSS border triangles */
+
 .top::before {
   top: 100%;
   border-top-color: $color-light-gray;
 }
 
-/* Absolute positioning */
 .right {
-  //   left: calc(100% + var(--tooltip-margin));
   left: calc(100% + 20px + $tooltip-arrow-size);
   top: 50%;
   transform: translateX(0) translateY(-50%);
 }
-/* CSS border triangles */
+
 .right::before {
   left: calc($tooltip-arrow-size * -1);
   top: 50%;
@@ -56,24 +50,22 @@ $tooltip-arrow-size: 17px;
   border-right-color: $color-light-gray;
 }
 
-/* Absolute positioning */
 .bottom {
   bottom: calc((var(--element-height) + 20px + $tooltip-arrow-size) * -1);
 }
-/* CSS border triangles */
+
 .bottom::before {
   bottom: 100%;
   border-bottom-color: $color-light-gray;
 }
 
-/* Absolute positioning */
 .tooltip.left {
   left: auto;
   right: calc(100% + 20px + $tooltip-arrow-size);
   top: 50%;
   transform: translateX(0) translateY(-50%);
 }
-/* CSS border triangles */
+
 .tooltip.left::before {
   left: auto;
   right: calc($tooltip-arrow-size * -2);
@@ -81,6 +73,7 @@ $tooltip-arrow-size: 17px;
   transform: translateX(0) translateY(-50%);
   border-left-color: $color-light-gray;
 }
+
 .tooltipOverlay {
   position: fixed;
   top: 0;
