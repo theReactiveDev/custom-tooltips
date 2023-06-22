@@ -1,7 +1,7 @@
 import { FC, ReactNode, useEffect, useRef } from "react";
 import cn from "classnames";
 
-import TooltipContent from "../TooltipContent/TooltipContent";
+import { TooltipContent } from "../../components";
 
 import { Tooltip as TooltipType } from "../../shared/types/tooltip";
 
@@ -12,6 +12,7 @@ interface TooltipProps {
   children: ReactNode;
   position: "right" | "top" | "left" | "bottom";
   currentStep: number;
+  totalSteps: number;
   show: boolean;
   onClose: () => void;
   onNextStep: () => void;
@@ -19,23 +20,22 @@ interface TooltipProps {
   targetSelector: string;
 }
 
-const Tooltip: FC<TooltipProps> = ({
+export const Tooltip: FC<TooltipProps> = ({
   position,
   show,
   content,
   children,
   className,
   currentStep,
+  totalSteps,
   onNextStep,
   onClose,
   targetSelector,
 }) => {
   const TooltipRef = useRef<HTMLDivElement>(null);
-  const target = document.querySelector(targetSelector);
 
   const handleResize = () => {
     if (TooltipRef.current) {
-      console.log("размеры поменялись");
       const RectSize = TooltipRef.current.getBoundingClientRect();
       TooltipRef.current.style.setProperty(
         "--element-height",
@@ -60,7 +60,8 @@ const Tooltip: FC<TooltipProps> = ({
   }, [show]);
 
   useEffect(() => {
-    console.log(show, currentStep, targetSelector);
+    const target = document.querySelector(targetSelector);
+
     if (show && currentStep === content.id) {
       if (TooltipRef.current) {
         TooltipRef.current.style.zIndex = "100";
@@ -91,6 +92,7 @@ const Tooltip: FC<TooltipProps> = ({
               content={content}
               onNextStep={onNextStep}
               onClose={onClose}
+              totalSteps={totalSteps}
             />
           </div>
           <div className={s.tooltipOverlay}></div>
@@ -99,5 +101,3 @@ const Tooltip: FC<TooltipProps> = ({
     </div>
   );
 };
-
-export default Tooltip;

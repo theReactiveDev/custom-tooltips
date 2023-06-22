@@ -6,12 +6,14 @@ import { Tooltip } from "../../shared/types/tooltip";
 
 interface TooltipContentProps {
   content: Tooltip;
+  totalSteps: number;
   onNextStep: () => void;
   onClose: () => void;
 }
 
-const TooltipContent: FC<TooltipContentProps> = ({
+export const TooltipContent: FC<TooltipContentProps> = ({
   content,
+  totalSteps,
   onNextStep,
   onClose,
 }) => {
@@ -25,10 +27,10 @@ const TooltipContent: FC<TooltipContentProps> = ({
 
       <div className={s.step}>
         <a onClick={onNextStep}>{content.button}</a>
-        <span>{content.id} / 4</span>
+        <span>
+          {content.id} / {totalSteps}
+        </span>
       </div>
     </div>
   );
 };
-
-export default TooltipContent;

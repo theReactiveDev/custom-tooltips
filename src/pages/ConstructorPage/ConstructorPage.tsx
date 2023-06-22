@@ -1,7 +1,6 @@
 import { useContext } from "react";
 
-import Button from "../../components/Button/Button";
-import Tooltip from "../../components/Tooltip/Tooltip";
+import { Button, Tooltip } from "../../components";
 
 import { TooltipContext } from "../../context/tooltip-context";
 
@@ -10,7 +9,7 @@ import ConstructorImage from "../../assets/images/constructorImage.png";
 import s from "./constructorPage.module.scss";
 
 const ConstructorPage = () => {
-  console.log(localStorage.removeItem("onboard"));
+  //   console.log(localStorage.removeItem("onboard"));
 
   const {
     currentStep,
@@ -19,7 +18,6 @@ const ConstructorPage = () => {
     setShowTooltips,
     tooltipData,
   } = useContext(TooltipContext);
-  console.log(useContext(TooltipContext));
 
   const onOnboardComplete = () => {
     localStorage.setItem("onboard", "complete");
@@ -58,6 +56,7 @@ const ConstructorPage = () => {
           position="top"
           content={tooltipData[0]}
           currentStep={currentStep}
+          totalSteps={tooltipData.length}
           show={showTooltips}
           onNextStep={handleNextStep}
           onClose={handleClose}
@@ -69,6 +68,7 @@ const ConstructorPage = () => {
           position="right"
           content={tooltipData[1]}
           currentStep={currentStep}
+          totalSteps={tooltipData.length}
           show={showTooltips}
           onNextStep={handleNextStep}
           onClose={handleClose}

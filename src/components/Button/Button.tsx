@@ -1,5 +1,4 @@
-import { FC, RefObject } from "react";
-
+import { FC } from "react";
 import cn from "classnames";
 
 import s from "./button.module.scss";
@@ -12,7 +11,7 @@ interface ButtonProps {
   variant?: "light" | "dark";
 }
 
-const Button: FC<ButtonProps> = ({
+export const Button: FC<ButtonProps> = ({
   title,
   className,
   onClick,
@@ -29,5 +28,3 @@ const Button: FC<ButtonProps> = ({
     </button>
   );
 };
-
-export default Button;

@@ -14,10 +14,4 @@ export const TooltipsMock: Tooltip[] = [
       "Купи уже готовый диван и не парься ни с какими конструкторами",
     button: "Спасибо пожалуйста",
   },
-  {
-    id: 3,
-    title: "Шаг 3",
-    description: "Опция 3",
-    button: "Далее",
-  },
 ];
